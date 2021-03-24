@@ -1,0 +1,30 @@
+{
+  "name": "30nama Assistant",
+  "version": "0.1",
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "/src/img/float-icon.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://30nama.com/*"],
+      "js": ["/src/js/30nama.js"]
+    },
+    {
+      "matches": ["*://www.imdb.com/title/*"],
+      "js": ["/src/js/imdb.js"],
+      "css": ["/src/css/imdb.css"]
+    }
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": "/src/img/icon.png",
+    "default_popup": "/src/popup.html"
+  },
+  "background": {
+    "scripts": ["/src/js/background.js"],
+    "persistent": false
+  }
+}
