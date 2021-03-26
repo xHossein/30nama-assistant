@@ -1,6 +1,6 @@
 {
   "name": "30nama Assistant",
-  "version": "0.1",
+  "version": "0.2",
   "manifest_version": 2,
   "web_accessible_resources": [
     "/src/img/float-icon.png"
@@ -11,7 +11,7 @@
       "js": ["/src/js/30nama.js"]
     },
     {
-      "matches": ["*://www.imdb.com/title/*"],
+      "matches": ["*://www.imdb.com/title/*","*://www.imdb.com/chart/*","*://www.imdb.com/list/*"],
       "js": ["/src/js/imdb.js"],
       "css": ["/src/css/imdb.css"]
     }
