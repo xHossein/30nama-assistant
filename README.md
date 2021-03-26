@@ -1,9 +1,10 @@
-# **30nama Assistant** , _a Chromium/Chrome extension_
+# دستیار 30نما ، افزونه‌ی کرومیوم/کروم
 
-## Bypass Blocked Download Links
-Replaces all filtered download links with non-filtered links.
+## لینک‌های دانلود بدون فیلتر
+.تمامی لینک های دانلود فیلتر شده را با لینک های فیلتر نشده ، ‌جایگزین میکند
+
 <br><br>
-## From **IMDB** to **30NAMA**
-Shows a floating button on [IMDB](https://www.imdb.com) page of a movie/series/... , which is linked to the page of that movie/series/... on [30NAMA](https://30nama.com).
-<br><br><br>
-Thanks to [AmirHossein Sadeqi](https://github.com/sadeqi-ah)
+## IMDB لینک‌های 30نما در 
+.که با کلیک بر آن‌، به صفحه‌ی آن محتوا در 30نما منتقل خواهید شد  IMDB نمایش دکمه ای شناور در صفحه‌ی فیلم ، سریال و... در
+
+.خواهید دید IMDB همچین شما لینکی برای رفتن به 30نما، در کنار نام فیلم ، سریال و ... در بخش چارت‌ها و لیست‌های

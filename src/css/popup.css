@@ -19,12 +19,33 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "Estedad";
+    src: url("/src/fonts/Estedad-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Estedad";
+    src: url("../fonts/Estedad-SemiBold.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Estedad";
+    src: url("../fonts/Estedad-Bold.woff2") format("woff2");
+    font-weight: bold;
+    font-style: normal;
+}
+
 :root {
     font-size: 18px;
 }
 
 body {
-    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;
+    font-family: "Estedad","Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;
     font-weight: 400;
     min-width: 380px;
     padding: 0;
@@ -43,6 +64,7 @@ a.cnama-logo {
     float: left;
     color: rgb(177, 177, 177);
     font-size: 19px;
+    font-family: 'Open Sans',-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;
     margin-left: 4px;
     margin-top: 44px;
 }
@@ -78,29 +100,29 @@ svg.github:hover {
 }
 
 .switch#imdb {
-    float: left;
+    float: right;
     position: fixed;
-    left: 60px;
+    right: 60px;
     top: 110px;
 }
 a#imdb {
-    float: left;
+    float: right;
     position: fixed;
-    left: 118px;
-    top: 112px;
+    right: 117px;
+    top: 108px;
 }
 
 .switch#download_links {
-    float: left;
+    float: right;
     position: fixed;
-    left: 60px;
+    right: 60px;
     top: 145px;
 }
 a#download_links {
-    float: left;
+    float: right;
     position: fixed;
-    left: 118px;
-    top: 147px;
+    right: 117px;
+    top: 143px;
 }
 
 .switch input {
@@ -126,7 +148,7 @@ a#download_links {
     content: "";
     height: 14px;
     width: 14px;
-    left: 2px;
+    left: 23px;
     bottom: 3px;
     background-color: white;
     -webkit-transition: 0.4s;
@@ -148,7 +170,7 @@ a#download_links {
     content: "";
     height: 14px;
     width: 14px;
-    left: 2px;
+    left: 23px;
     bottom: 3px;
     background-color: white;
 }
@@ -160,9 +182,9 @@ input:checked + .non_slider {
 
 input:checked + .slider:before,
 input:checked + .non_slider:before {
-    -webkit-transform: translateX(21px);
-    -ms-transform: translateX(21px);
-    transform: translateX(21px);
+    -webkit-transform: translateX(-20px);
+    -ms-transform: translateX(-20px);
+    transform: translateX(-20px);
 }
 
 .slider.round,
