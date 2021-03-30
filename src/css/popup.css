@@ -40,33 +40,43 @@
     font-style: normal;
 }
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 :root {
     font-size: 18px;
 }
 
 body {
-    font-family: "Estedad","Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;
+    font-family: "Estedad", "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Arial,
+        sans-serif;
     font-weight: 400;
     min-width: 380px;
     padding: 0;
     margin: 0;
 }
 
-.cnama-logo {
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 20px 0 0 0;
+}
+
+img.cnama-logo {
     object-fit: cover;
-    float: left;
     height: 65px;
     height: 35px;
-    margin-left: 98px;
-    margin-top: 35px;
 }
-a.cnama-logo {
-    float: left;
+span.cnama-logo {
     color: rgb(177, 177, 177);
     font-size: 19px;
-    font-family: 'Open Sans',-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;
-    margin-left: 4px;
-    margin-top: 44px;
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;
+    margin-left: 5px;
+    display: block;
 }
 
 div.footer {
@@ -79,17 +89,42 @@ svg.github {
     height: 24px;
     margin-left: 178px;
     margin-top: 13px;
-    transition: opacity .8s ease;
+    transition: opacity 0.8s ease;
 }
 
 svg.github:hover {
     opacity: 1;
-    transition: all .8s ease;
+    transition: all 0.8s ease;
 }
 
 .container {
     background-color: white;
-    height: 200px;
+    padding: 30px 0;
+}
+
+.setting-container {
+    width: 100%;
+    list-style-type: none;
+    padding: 0;
+    text-align: right;
+    padding-right: 70px;
+}
+
+.setting-container li {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.setting-container li label {
+    margin-left: auto;
+}
+
+.setting-container li p {
+    width: 100%;
+    text-align: right;
+    padding-right: 20px;
 }
 
 .switch {
@@ -97,32 +132,6 @@ svg.github:hover {
     display: inline-block;
     width: 40px;
     height: 20px;
-}
-
-.switch#imdb {
-    float: right;
-    position: fixed;
-    right: 60px;
-    top: 110px;
-}
-a#imdb {
-    float: right;
-    position: fixed;
-    right: 117px;
-    top: 108px;
-}
-
-.switch#download_links {
-    float: right;
-    position: fixed;
-    right: 60px;
-    top: 145px;
-}
-a#download_links {
-    float: right;
-    position: fixed;
-    right: 117px;
-    top: 143px;
 }
 
 .switch input {
@@ -148,7 +157,7 @@ a#download_links {
     content: "";
     height: 14px;
     width: 14px;
-    left: 23px;
+    left: 18px;
     bottom: 3px;
     background-color: white;
     -webkit-transition: 0.4s;
@@ -182,9 +191,9 @@ input:checked + .non_slider {
 
 input:checked + .slider:before,
 input:checked + .non_slider:before {
-    -webkit-transform: translateX(-20px);
-    -ms-transform: translateX(-20px);
-    transform: translateX(-20px);
+    -webkit-transform: translateX(-15px);
+    -ms-transform: translateX(-15px);
+    transform: translateX(-15px);
 }
 
 .slider.round,
@@ -196,5 +205,3 @@ input:checked + .non_slider:before {
 .non_slider.round:before {
     border-radius: 50%;
 }
-
-
