@@ -79,20 +79,25 @@ span.cnama-logo {
     display: block;
 }
 
-div.footer {
+.footer {
     background-color: rgb(250, 249, 249);
     height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-svg.github {
+.footer a{
+    height: 24px;
+}
+
+.github {
     opacity: 0.5;
     width: 24px;
     height: 24px;
-    margin-left: 178px;
-    margin-top: 13px;
     transition: opacity 0.8s ease;
 }
 
-svg.github:hover {
+.github:hover {
     opacity: 1;
     transition: all 0.8s ease;
 }

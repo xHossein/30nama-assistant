@@ -17,7 +17,8 @@
       "matches": [
         "*://www.imdb.com/title/*",
         "*://www.imdb.com/chart/*",
-        "*://www.imdb.com/list/*"
+        "*://www.imdb.com/list/*",
+        "*://www.imdb.com/search/title/*"
       ],
       "js": ["/src/js/imdb.js"],
       "css": ["/src/css/imdb.css"]

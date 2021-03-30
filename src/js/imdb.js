@@ -1,11 +1,10 @@
+const URL = location.href;
 chrome.storage.local.get('imdb', function({imdb}){
-    const URL = location.href;
 
     if (imdb == null || imdb != null && imdb == true){
         
         if (URL.includes("imdb.com/title/")){
-            const imdbID = URL.match('imdb.com/title/tt(\\d+)')[1];
-            const link30nama = `https://30nama.com/movies/${imdbID}.html`;
+            const link30nama = create30namaLink(URL)
 
             // img
             const floatingButton = document.createElement('img');
@@ -25,39 +24,56 @@ chrome.storage.local.get('imdb', function({imdb}){
             
             document.body.appendChild(container);
         }
-        else{
-            // For imdb.com/list/...
-            let elements_query = ".lister-item.mode-detail";
-            let imdb_query = "div:nth-child(1) h3";
+        else if(URL.includes("imdb.com/chart/")){
 
-            // For imdb.com/chart/...
-            if (URL.includes("imdb.com/chart/")){
-                elements_query = "tbody tr";
-                imdb_query = "td[class=titleColumn]";
-            }
-            
+            const elements_query = "tbody tr";
+            const name_query = "td[class=titleColumn]";
+
             Array.from(document.querySelectorAll(elements_query)).forEach(element => {
 
-                const imdbID = element.querySelector(`${imdb_query} a`).href.match('imdb.com/title/tt(\\d+)')[1];
-                const link30nama = `https://30nama.com/movies/${imdbID}.html`;
-                
-                const link = document.createElement('a');
-                link.innerText = " | "
-                link.href = link30nama;
+                const cnama = create30namaText(
+                                create30namaLink(element.querySelector(`${name_query} a`).href)
+                                );
 
-                const cnama = document.createElement('span');
-                cnama.style = "color:red;";
-                cnama.innerText = "30nama";
-                
-                link.appendChild(cnama);
-
-                if (URL.includes("imdb.com/chart/boxoffice") || URL.includes("imdb.com/list/"))
-                    element.querySelector(imdb_query).appendChild(link);
+                if (URL.includes("imdb.com/chart/boxoffice"))
+                    element.querySelector(name_query).appendChild(cnama);
                 else
-                    element.querySelector(`${imdb_query} span`).appendChild(link);
+                    element.querySelector(`${name_query} span`).appendChild(cnama);
   
             });
+        }
+        else if(URL.includes("imdb.com/list/") || URL.includes("/search/title/")){
 
+            const elements_query = URL.includes("/search/title/") ? ".lister-item.mode-advanced" : ".lister-item.mode-detail";
+            const name_query = "div:nth-child(1) h3";
+
+            Array.from(document.querySelectorAll(elements_query)).forEach(element => {
+
+                const cnama = create30namaText(
+                                create30namaLink(element.querySelector(`${name_query} a`).href)
+                            );
+
+                element.querySelector(name_query).appendChild(cnama);
+  
+            });
         }
     }
 });
+
+function create30namaLink(URL) {
+    const imdbID = URL.match('imdb.com/title/tt(\\d+)')[1];
+    return `https://30nama.com/movies/${imdbID}.html`;
+};
+
+function create30namaText(link30nama) {
+    const cnama = document.createElement('span');
+    cnama.innerText = " | ";
+
+    const link = document.createElement('a');
+    link.href = link30nama;
+    link.style = "color:red;";
+    link.innerText = "30nama";
+    
+    cnama.appendChild(link);
+    return cnama;
+};
