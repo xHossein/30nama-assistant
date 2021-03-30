@@ -1,4 +1,4 @@
-const FILTERED = 'https://eu.cdn.oneandonly.cloud';
+const FILTERED = 'https://eu.cdn.cloudam.xyz';
 const NON_FILTERED = 'https://176.9.2.39';
 
 chrome.storage.local.get('download_links', function ({ download_links }) {
