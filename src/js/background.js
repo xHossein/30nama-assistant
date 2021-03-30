@@ -1,13 +1,8 @@
-let checkbox = document.querySelector("#imdb input");
-if (checkbox != null){
-    checkbox.addEventListener('change', function() {
-        chrome.storage.local.set({'imdb': this.checked});
-    });
-}
-
-checkbox = document.querySelector("#download_links input");
-if (checkbox != null){
-    checkbox.addEventListener('change', function() {
-        chrome.storage.local.set({'download_links': this.checked});
-    });
-}
+['imdb', 'download_links', 'player'].forEach(id => {
+    const checkbox = document.querySelector(`#${id} input`);
+    if (checkbox != null) {
+        checkbox.addEventListener('change', function (e) {
+            chrome.storage.local.set({ [id]: this.checked });
+        });
+    }
+});

@@ -1,0 +1,49 @@
+@keyframes zoomIn {
+    from {
+        transform: scale3d(0, 0, 0);
+    }
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+@keyframes zoomOut {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+    to {
+        transform: scale3d(0, 0, 0);
+    }
+}
+
+.ca-zoom-in {
+    animation: zoomIn 0.5s forwards;
+}
+
+.ca-zoom-out {
+    animation: zoomOut 0.5s forwards;
+}
+
+.ca-toast-msg-container {
+    position: fixed;
+    width: 100%;
+    top: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ca-toast-msg {
+    border-radius: 10px;
+    text-align: right;
+    padding: 15px 30px;
+    color: #fff;
+}
+
+.ca-toast-msg.ca-green {
+    background-color: #02c39a;
+}
+
+.ca-toast-msg.ca-red {
+    background-color: #e5383b;
+}
