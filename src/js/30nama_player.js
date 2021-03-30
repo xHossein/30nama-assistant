@@ -1,12 +1,8 @@
 const BASE_URL = 'https://30nama.com'
 
-
-
 const controlBar = document.querySelector('.vjs-control-bar');
 
 chrome.storage.local.get('player', function ({ player }) {
-    console.log(player);
-
     if (player == null || player != null && player == true) {
         if (controlBar) {
             injectDownloadBtn();
@@ -149,64 +145,47 @@ function injectStreamLinkBtn() {
 
     const menu = createMenu(wrapper);
 
-    const streamLinks = getStreamLinks();
-
-    streamLinks.forEach(link => {
-        menu.addItem({ text: link.label === 'خودکار' ? `لینک استریم ${link.label}` : `${link.label} لینک استریم` }, () => {
-            copyTextToClipboard(link.src);
-        })
+    getStreamLinks().then(streamLinks => {
+        console.log(streamLinks)
+        streamLinks.forEach(link => {
+            menu.addItem({ text: link.label === 'خودکار' ? `لینک استریم ${link.label}` : `${link.label} لینک استریم` }, () => {
+                copyTextToClipboard(link.src);
+            });
+        });
     });
-
 
 }
 
 
-function getStreamLinks() {
+async function getStreamLinks() {
     const scripts = document.getElementsByTagName('script');
     for (const script of scripts) {
 
-        let sources = script.innerText.replaceAll('\n', '').match(/sources = (\[.*\])/);
+        let autoQualityStream = script.innerText.match(/src: "(.*\.m3u8)", label: 'خودکار'/);
 
-        if (!sources) {
+        if (!autoQualityStream) {
             continue;
         }
+        autoQualityStream = autoQualityStream[1];
+        const baseLink = autoQualityStream.replace(/([^\/]+$)/, '');
 
-        sources = sources[1].replaceAll('src', '"src"');
-        sources = sources.replaceAll('label', '"label"');
-        sources = sources.replaceAll("'", '"');
-        sources = sources.replaceAll(' ', '');
-        sources = sources.replaceAll(',]', ']');
+        const result = [{ src: autoQualityStream, label: 'خودکار' }];
 
-        try {
-            sources = JSON.parse(sources);
-        } catch {
-            return;
-        }
+        let response = await fetch(autoQualityStream);
+        response = await response.text();
 
-        const qualityCode = {
-            "_240p": "_364_240p",
-            "_360p": "_596_360p",
-            "_480p": "_928_480p",
-            "_720p": "_1442_720p",
-            "_1080p": "_3256_1080p"
-        }
+        const links = response.match(/(.*\.m3u8)/g);
+
+        links.reverse().forEach(link => {
+            result.push({
+                src: `${baseLink}${link}`,
+                label: link.match(/(.*?)\//)[1]
+            });
+        });
 
 
-        let backLink = document.querySelector('.back-to a');
-        backLink = backLink && backLink.href;
+        return result;
 
-        return sources.map(source => {
-            let src = source.src.split('?')[0];
-            if (backLink.includes('/movies/')) {
-                Object.entries(qualityCode).forEach(([key, value]) => {
-                    src = src.replace(key, value);
-                });
-            }
-            return {
-                src,
-                label: source.label
-            };
-        })
     }
 }
 
