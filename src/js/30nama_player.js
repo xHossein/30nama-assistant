@@ -80,17 +80,18 @@ function createMenu(parent, itemWidth) {
 
 function injectDownloadBtn() {
 
+    const subLinks = getSubtitleLinks();
+
+    if (!subLinks)
+        return;
+
     const wrapper = createControllerButton();
 
     createButton(wrapper, `<svg width="36" height="36" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
     </svg>`);
 
-
     const menu = createMenu(wrapper, '15em');
-
-
-    const subLinks = getSubtitleLinks();
 
     menu.addItem({
         text: 'دانلود زیرنویس فارسی',
@@ -146,7 +147,6 @@ function injectStreamLinkBtn() {
     const menu = createMenu(wrapper);
 
     getStreamLinks().then(streamLinks => {
-        console.log(streamLinks)
         streamLinks.forEach(link => {
             menu.addItem({ text: link.label === 'خودکار' ? `لینک استریم ${link.label}` : `${link.label} لینک استریم` }, () => {
                 copyTextToClipboard(link.src);
