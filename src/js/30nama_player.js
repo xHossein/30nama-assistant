@@ -113,8 +113,8 @@ function getSubtitleLinks() {
     const scripts = document.getElementsByTagName('script');
     for (const script of scripts) {
 
-        const faLink = script.innerText.match(/persian_subtitle_src = '(.*)'/);
-        const enLink = script.innerText.match(/english_subtitle_src = '(.*)'/);
+        const faLink = script.innerText.match(/"persian":"(.*?)"/);
+        const enLink = script.innerText.match(/"english":"(.*?)"/);
 
         if (!faLink || !enLink) {
             continue;
@@ -161,7 +161,7 @@ async function getStreamLinks() {
     const scripts = document.getElementsByTagName('script');
     for (const script of scripts) {
 
-        let autoQualityStream = script.innerText.match(/src: "(.*\.m3u8)", label: 'خودکار'/);
+        let autoQualityStream = script.innerText.match(/src":"(.*\.m3u8)","label":"خودکار"/);
 
         if (!autoQualityStream) {
             continue;
