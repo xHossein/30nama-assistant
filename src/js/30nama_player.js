@@ -1,17 +1,21 @@
 const BASE_URL = 'https://30nama.com'
 
-const controlBar = document.querySelector('.vjs-control-bar');
-
-chrome.storage.local.get('player', function ({ player }) {
-    if (player == null || player != null && player == true) {
-        if (controlBar) {
-            injectDownloadBtn();
-            injectStreamLinkBtn();
-        }
-    }
+document.addEventListener('DOMContentLoaded', (event) => {
+    addBtns();
 });
 
-
+var controlBar;
+function addBtns() {
+    controlBar = document.querySelector('.vjs-control-bar');
+    chrome.storage.local.get('player', function ({ player }) {
+        if (player == null || player != null && player == true) {
+            if (controlBar) {
+                injectDownloadBtn();
+                injectStreamLinkBtn();
+            }
+        }
+    });
+}
 
 function createControllerButton() {
     const wrapper = document.createElement('div');
@@ -93,11 +97,13 @@ function injectDownloadBtn() {
 
     const menu = createMenu(wrapper, '15em');
 
-    menu.addItem({
-        text: 'دانلود زیرنویس فارسی',
-        link: subLinks.fa,
-        filename: `${subLinks.filename}_fa.srt`
-    });
+    if (subLinks.fa){
+        menu.addItem({
+            text: 'دانلود زیرنویس فارسی',
+            link: subLinks.fa,
+            filename: `${subLinks.filename}_fa.srt`
+        });
+    }
 
     menu.addItem({
         text: 'دانلود زیرنویس انگلیسی',
@@ -116,17 +122,18 @@ function getSubtitleLinks() {
         const faLink = script.innerText.match(/"persian":"(.*?)"/);
         const enLink = script.innerText.match(/"english":"(.*?)"/);
 
-        if (!faLink || !enLink) {
+        if (!faLink && !enLink) {
             continue;
         }
+        
+        const faSub = faLink && `${BASE_URL}${faLink[1]}`
+        const enSub = enLink && `${BASE_URL}${enLink[1]}`
 
-        const faSub = `${BASE_URL}${faLink[1]}`;
-        const enSub = `${BASE_URL}${enLink[1]}`;
         let fileName = script.innerText.match(/\/(.*)_(fa|en)\.srt/)[1];
         fileName = fileName.split('/');
         fileName = fileName[fileName.length - 1];
 
-        if (faSub) {
+        if (enSub) {
             return {
                 fa: faSub,
                 en: enSub,
@@ -179,7 +186,7 @@ async function getStreamLinks() {
         links.reverse().forEach(link => {
             result.push({
                 src: `${baseLink}${link}`,
-                label: link.match(/(.*?)\//)[1]
+                label: link.match(/(.*?)[\.\/]/)[1]
             });
         });
 
