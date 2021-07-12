@@ -1,4 +1,4 @@
-['imdb', 'download_links', 'player'].forEach(element => {
+['imdb', 'download_links', 'player', 'subscene'].forEach(element => {
   chrome.storage.local.get(element, function (data) {
     const slider = document.querySelector(`#${element} span`);
 

@@ -1,4 +1,4 @@
-['imdb', 'download_links', 'player'].forEach(id => {
+['imdb', 'download_links', 'player', 'subscene'].forEach(id => {
     const checkbox = document.querySelector(`#${id} input`);
     if (checkbox != null) {
         checkbox.addEventListener('change', function (e) {

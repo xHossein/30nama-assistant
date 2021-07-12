@@ -1,12 +1,19 @@
 {
   "name": "30nama Assistant",
-  "version": "0.3.2",
+  "version": "0.3.4",
   "manifest_version": 2,
   "web_accessible_resources": ["/src/img/float-icon.png"],
   "content_scripts": [
     {
       "matches": ["*://30nama.com/*"],
       "js": ["/src/js/30nama.js"]
+    },
+    {
+      "matches": [
+        "*://subscene.com/",
+        "*://subscene.com/subtitles/*"
+      ],
+      "js": ["/src/js/subscene.js"]
     },
     {
       "matches": ["*://30nama.com/play/*"],
